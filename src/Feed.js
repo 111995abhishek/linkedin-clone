@@ -15,7 +15,9 @@ function Feed() {
     const [posts, setPosts] = useState([]);
 
     useEffect(() =>{
-        db.collection("posts").onSnapshot(snapshot=>
+        db.collection("posts")
+        .orderBy("timeStamp","desc")
+        .onSnapshot(snapshot=>
             setPosts(snapshot.docs.map(doc=>({
                 id:doc.id,
                 data:doc.data(),
@@ -29,12 +31,12 @@ function Feed() {
 
         db.collection('posts').add({
             name:"Abhishek singh",
-            description:'This is a text',
+            description:'This is a Text',
             message: input,
             photoUrl:'',
-            timeStamp:firebase.firestore.FeildValue.serverTimeStamp()
-        })
-
+            timeStamp:firebase.firestore.FieldValue.serverTimestamp(),
+        });
+        setInput("");
     };
 
     return (
@@ -54,8 +56,15 @@ function Feed() {
                     <InputOption Icon={CalendarViewDayIcon} title="Write Article" color="#70B5F9"/>
                 </div>
             </div>
-
-            <Post name="Abhishek singh" description="This Is A Test" message="Wow"  />
+            {posts.map( ({id, data: {name, message,description,photoUrl} }) => (
+                <Post
+                key={id}
+                name={name}
+                description={description}
+                message = {message}
+                photoUrl={photoUrl}/>
+            ))}
+            {/* <Post name="Abhishek singh" description="This Is A Test" message="Wow"  /> */}
         </div>
     )
 }
