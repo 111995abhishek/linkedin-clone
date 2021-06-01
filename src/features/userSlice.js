@@ -1,18 +1,17 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { fetchCount } from './counter/counterAPI';
+import { createSlice } from '@reduxjs/toolkit';
 
 
 export const userSlice = createSlice({
-  name: 'counter',
+  name: 'user',
   initialState:{
     user:null,
   },
   reducers: {
     login: (state,action) => {
-      state.value = action.payload;
+      state.user = action.payload;
     },
     logout: (state,action) => {
-      state.value = null;
+      state.user = null;
     },
     
   },

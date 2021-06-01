@@ -15,7 +15,7 @@ function Header() {
                 <img src="https://www.fpsa.org/wp-content/uploads/linkedin-logo-copy.png" alt=""/>
                 <div className="header_search">
                      <SearchIcon/>
-                     <input type="text"/>
+                     <input placeholder="Search" type="text"/>
                 </div>
             </div>
 

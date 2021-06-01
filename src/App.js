@@ -1,22 +1,27 @@
 import React from 'react';
-import { Counter } from './features/counter/Counter';
 import './App.css';
 import Header from './Header';
 import Sidebar from './Sidebar';
 import Feed from './Feed';
+import { selectUser} from './features/userSlice';
+import { useSelector} from 'react-redux';
+import Login from './Login';
 
 function App() {
+  const user = useSelector(selectUser);
   return (
     <div className="app">
       {/* header */}
       <Header/>
-      <div className="app_body">
-        <Sidebar/>
-        <Feed/>
-      </div>
-        {/* side-bar */}
-        {/* Feed */}
-        {/* widgets */}
+      {!user ? (
+         <Login/> 
+         ) : (
+          <div className="app_body">
+          <Sidebar/>
+          <Feed/>
+          </div>
+      )
+    }
     </div>
   );
 }
